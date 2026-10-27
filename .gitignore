@@ -1,0 +1,12 @@
+# Dependencies and build output
+node_modules/
+tools/node_modules/
+scripts/test-web-e2e/node_modules/
+test-results/
+playwright-report/
+geo/.cache/
+# Local environment and editor files
+.env
+.env.*
+*.log
+.DS_Store

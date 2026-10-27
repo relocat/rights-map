@@ -1,0 +1,9 @@
+{
+  "name": "relocat-geo-pack-build",
+  "private": true,
+  "type": "module",
+  "description": "Build-time tooling for the Relocat geo pack. Not shipped.",
+  "devDependencies": {
+    "mapshaper": "0.6.111"
+  }
+}

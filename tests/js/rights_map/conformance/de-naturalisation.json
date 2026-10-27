@@ -1,0 +1,135 @@
+{
+  "topic": "de-naturalisation",
+  "authorities": {
+    "leipzig-city": { "id": "fixture-leipzig", "covers": ["14713"], "times": { "total": { "lo": 37, "partial": true, "text": "More than 3 years", "src": "official", "date": "2025-02-28" } } },
+    "berlin": { "id": "fixture-berlin", "covers": ["11000"], "times": { "total": { "lo": 7, "hi": 9, "text": "7–9 months", "src": "estimate", "date": "2026-05-11" } } },
+    "no-total": { "id": "fixture-no-total", "covers": ["99999"], "times": { "total": { "src": "none" } } }
+  },
+  "cases": [
+    {
+      "name": "Leipzig city: decision uses lo of an open-ended total, passport warning fires",
+      "today": "2026-10",
+      "authority": "leipzig-city",
+      "facts": { "de_residence_since": "2022", "passport": "valid", "passport_until": "2028-03" },
+      "expect": {
+        "milestones": { "eligible_from": "2027-01", "apply": "2027-01", "decision": "2030-02" },
+        "checkIds": ["nat-passport-before-decision"],
+        "missing": []
+      }
+    },
+    {
+      "name": "Berlin: decision uses the upper bound (9, not 7), no warning",
+      "today": "2026-10",
+      "authority": "berlin",
+      "facts": { "de_residence_since": "2022", "passport": "valid", "passport_until": "2029-01" },
+      "expect": {
+        "milestones": { "eligible_from": "2027-01", "apply": "2027-01", "decision": "2027-10" },
+        "checkIds": []
+      }
+    },
+    {
+      "name": "passport expiring before the application date",
+      "today": "2026-10",
+      "authority": "berlin",
+      "facts": { "de_residence_since": "2022", "passport": "valid", "passport_until": "2026-12" },
+      "expect": {
+        "checkIds": ["nat-passport-before-apply", "nat-passport-before-decision"]
+      }
+    },
+    {
+      "name": "expired passport: only nat-passport-expired, passport_until is ignored",
+      "today": "2026-10",
+      "authority": "leipzig-city",
+      "facts": { "de_residence_since": "2022", "passport": "expired", "passport_until": "2025-01" },
+      "expect": {
+        "checkIds": ["nat-passport-expired"],
+        "requirements": { "identity": "unmet" },
+        "requirementNotes": { "identity": "passport expired, see tips" }
+      }
+    },
+    {
+      "name": "no total: decision is undefined and no decision warning",
+      "today": "2026-10",
+      "authority": "no-total",
+      "facts": { "de_residence_since": "2022", "passport": "valid", "passport_until": "2026-12" },
+      "expect": {
+        "milestones": { "eligible_from": "2027-01", "apply": "2027-01" },
+        "checkIds": ["nat-passport-before-apply"]
+      }
+    },
+    {
+      "name": "no authority selected: no decision milestone",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2022", "passport": "valid", "passport_until": "2027-06" },
+      "expect": {
+        "milestones": { "eligible_from": "2027-01", "apply": "2027-01" },
+        "checkIds": []
+      }
+    },
+    {
+      "name": "nothing answered: only the residence year is missing",
+      "today": "2026-10",
+      "authority": "berlin",
+      "facts": {},
+      "expect": {
+        "missing": ["de_residence_since"],
+        "milestones": {},
+        "checkIds": [],
+        "requirements": {
+          "residence": "unanswered", "german": "unanswered", "test": "unanswered", "livelihood": "unanswered",
+          "convictions": "info", "commitment": "info", "identity": "unanswered"
+        }
+      }
+    },
+    {
+      "name": "residence since 2015: apply is today",
+      "today": "2026-10",
+      "authority": "berlin",
+      "facts": { "de_residence_since": "2015" },
+      "expect": {
+        "milestones": { "eligible_from": "2020-01", "apply": "2026-10", "decision": "2027-07" },
+        "requirements": { "residence": "met" }
+      }
+    },
+    {
+      "name": "checklist — residence not yet five years: note carries the earliest date",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2022" },
+      "expect": {
+        "requirements": { "residence": "unmet" },
+        "requirementNotes": { "residence": "from 2027-01" }
+      }
+    },
+    {
+      "name": "checklist — B1, test and livelihood met; info items stay info",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2015", "passport": "valid", "german": "B1", "de_nat_test": "yes", "de_own_livelihood": "yes" },
+      "expect": {
+        "requirements": {
+          "residence": "met", "german": "met", "test": "met", "livelihood": "met",
+          "convictions": "info", "commitment": "info", "identity": "met"
+        }
+      }
+    },
+    {
+      "name": "checklist — A2 does not meet B1; no test and no livelihood are unmet",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2015", "german": "A2", "de_nat_test": "no", "de_own_livelihood": "no" },
+      "expect": {
+        "requirements": { "german": "unmet", "test": "unmet", "livelihood": "unmet", "identity": "unanswered" }
+      }
+    },
+    {
+      "name": "a german change flips the german requirement (before)",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2015", "german": "B1" },
+      "expect": { "requirements": { "german": "met" } }
+    },
+    {
+      "name": "a german change flips the german requirement (after)",
+      "today": "2026-10",
+      "facts": { "de_residence_since": "2015", "german": "none" },
+      "expect": { "requirements": { "german": "unmet" } }
+    }
+  ]
+}

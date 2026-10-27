@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
+#
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/relocat/rights-map/security/advisories/new
+    about: Please report security problems privately, never in a public issue.

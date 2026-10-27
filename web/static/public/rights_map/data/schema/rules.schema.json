@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relocat-rights-map/rules.schema@1",
+  "title": "Relocat Rights Map rules file",
+  "type": "object",
+  "required": ["schema", "fact_schema", "generated", "licence", "attribution", "groups", "sources", "facts", "migrations", "topics"],
+  "properties": {
+    "schema": {"const": "relocat-rights-map/rules@1"},
+    "fact_schema": {"type": "integer", "minimum": 1},
+    "generated": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "licence": {"const": "CC-BY-4.0"},
+    "attribution": {"type": "string", "minLength": 1},
+    "groups": {"type": "object", "additionalProperties": {"type": "array", "items": {"type": "string"}}},
+    "sources": {"type": "object", "additionalProperties": {"$ref": "#/$defs/source"}},
+    "facts": {"type": "array", "items": {"$ref": "#/$defs/fact"}},
+    "migrations": {"type": "array"},
+    "topics": {"type": "array", "items": {"$ref": "#/$defs/topic"}}
+  },
+  "$defs": {
+    "factId": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "dateString": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "source": {
+      "type": "object",
+      "required": ["label", "url", "kind"],
+      "additionalProperties": false,
+      "properties": {
+        "label": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "pattern": "^https://"},
+        "kind": {"enum": ["primary", "authority", "news"]}
+      }
+    },
+    "role": {"enum": ["about", "documents", "lever"]},
+    "fact": {
+      "type": "object",
+      "required": ["id", "scope", "type", "label"],
+      "properties": {
+        "id": {"$ref": "#/$defs/factId"},
+        "scope": {"enum": ["profile", "topic"]},
+        "type": {"enum": ["enum", "month", "year", "bool"]},
+        "label": {"type": "string"},
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "prefixItems": [{"type": "string"}, {"type": "string"}],
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "ordered": {"type": "boolean"},
+        "group": {"$ref": "#/$defs/role"},
+        "lever": {"type": "boolean"},
+        "companion": {"$ref": "#/$defs/factId"},
+        "parent": {
+          "type": "object",
+          "required": ["fact", "equals"],
+          "properties": {"fact": {"$ref": "#/$defs/factId"}, "equals": {}}
+        },
+        "sensitivity": {"enum": ["high"]},
+        "required": {"type": "boolean"}
+      },
+      "if": {"properties": {"type": {"enum": ["enum", "bool"]}}, "required": ["type"]},
+      "then": {"required": ["options"]}
+    },
+    "use": {
+      "type": "object",
+      "required": ["fact", "role"],
+      "properties": {
+        "fact": {"$ref": "#/$defs/factId"},
+        "role": {"$ref": "#/$defs/role"},
+        "required": {"type": "boolean"}
+      }
+    },
+    "topic": {
+      "type": "object",
+      "required": ["id", "title", "summary", "data_badge", "uses"],
+      "properties": {
+        "id": {"type": "string"},
+        "title": {"type": "string"},
+        "summary": {"type": "string"},
+        "data_badge": {"type": "string"},
+        "granularity": {"type": "string"},
+        "labels": {"type": "object"},
+        "defaults": {"type": "object", "propertyNames": {"$ref": "#/$defs/factId"}, "additionalProperties": {"type": "string"}},
+        "uses": {"type": "array", "items": {"$ref": "#/$defs/use"}},
+        "rules": {"type": "array", "items": {"$ref": "#/$defs/rule"}},
+        "tips": {"type": "array", "items": {"$ref": "#/$defs/tip"}},
+        "checks": {"type": "array", "items": {"$ref": "#/$defs/check"}},
+        "country": {"type": "string", "pattern": "^[A-Z]{2}$"},
+        "authorities_file": {"type": "string", "pattern": "^[A-Za-z0-9._-]+\\.json$"},
+        "derived": {
+          "type": "object",
+          "required": ["eligible_from", "apply", "decision"],
+          "additionalProperties": false,
+          "properties": {
+            "eligible_from": {"type": "string", "minLength": 1},
+            "apply": {"type": "string", "minLength": 1},
+            "decision": {"type": "string", "minLength": 1}
+          }
+        },
+        "requirements": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/requirement"}},
+        "legal_notes": {"type": "array", "items": {"type": "string", "minLength": 1}},
+        "colour": {"$ref": "#/$defs/colour"}
+      },
+      "allOf": [
+        {
+          "if": {"not": {"properties": {"granularity": {"const": "authority"}}, "required": ["granularity"]}},
+          "then": {"required": ["labels", "rules"]}
+        },
+        {
+          "if": {"properties": {"granularity": {"const": "authority"}}, "required": ["granularity"]},
+          "then": {"required": ["country", "authorities_file", "derived", "requirements", "colour"]}
+        }
+      ]
+    },
+    "requirement": {
+      "type": "object",
+      "required": ["id", "title"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "met": {"type": "object", "minProperties": 1},
+        "info": {"const": true},
+        "note": {"type": "string"},
+        "note_unmet": {"type": "string"},
+        "sources": {"type": "array", "items": {"type": "string"}}
+      },
+      "anyOf": [{"required": ["met"]}, {"required": ["info"]}]
+    },
+    "colour": {
+      "type": "object",
+      "required": ["metric_options", "buckets_months", "confirmed_if"],
+      "additionalProperties": false,
+      "properties": {
+        "metric_options": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["total", "wait", "proc"]}
+        },
+        "buckets_months": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"type": "integer", "minimum": 1}},
+        "confirmed_if": {"type": "string", "minLength": 1}
+      }
+    },
+    "rule": {
+      "type": "object",
+      "required": ["id", "countries", "when", "status", "detail"],
+      "properties": {
+        "id": {"type": "string"},
+        "countries": {
+          "oneOf": [{"type": "string"}, {"type": "array", "items": {"type": "string"}}]
+        },
+        "when": {"type": "object"},
+        "status": {"enum": ["ok", "restricted", "blocked", "unknown", "na", "origin"]},
+        "draft": {"type": "boolean"},
+        "detail": {
+          "type": "object",
+          "required": ["reason"],
+          "properties": {
+            "reason": {"type": "string"},
+            "sources": {"type": "array", "items": {"type": "string"}},
+            "last_verified": {"type": "string"}
+          }
+        }
+      },
+      "if": {
+        "properties": {"status": {"enum": ["ok", "restricted", "blocked"]}, "draft": {"not": {"const": true}}},
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "detail": {
+            "required": ["sources", "last_verified"],
+            "properties": {
+              "sources": {"minItems": 1},
+              "last_verified": {"$ref": "#/$defs/dateString"}
+            }
+          }
+        }
+      }
+    },
+    "tip": {
+      "type": "object",
+      "required": ["id", "when", "text"],
+      "properties": {
+        "id": {"type": "string"},
+        "when": {"type": "object"},
+        "text": {"type": "string"},
+        "sources": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "check": {
+      "type": "object",
+      "required": ["id", "when", "text", "severity"],
+      "properties": {
+        "id": {"type": "string"},
+        "when": {"type": "object"},
+        "text": {"type": "string"},
+        "severity": {"enum": ["warning"]}
+      }
+    }
+  }
+}

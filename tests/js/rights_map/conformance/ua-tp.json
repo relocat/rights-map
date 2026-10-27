@@ -1,0 +1,86 @@
+{
+  "topic": "ua-tp",
+  "cases": [
+    {
+      "name": "UA, obligation yes, exit no, holds no",
+      "today": "2026-10",
+      "facts": { "nat": "UA", "ua_military_obligation": "yes", "ua_exit_proof": "no", "ua_holds_tp": "no" },
+      "expect": {
+        "statusCounts": { "ok": 1, "restricted": 26, "origin": 1, "unknown": 11 },
+        "statuses": { "HU": "ok", "DK": "restricted", "DE": "restricted", "UA": "origin", "NO": "unknown" },
+        "levers": { "ua_exit_proof": { "yes": 25 } },
+        "missing": []
+      }
+    },
+    {
+      "name": "exit yes",
+      "today": "2026-10",
+      "facts": { "nat": "UA", "ua_military_obligation": "yes", "ua_exit_proof": "yes", "ua_holds_tp": "no" },
+      "expect": {
+        "statusCounts": { "ok": 26, "unknown": 12, "origin": 1 },
+        "statuses": { "DK": "unknown", "FR": "ok" },
+        "levers": {},
+        "missing": []
+      }
+    },
+    {
+      "name": "holds yes",
+      "today": "2026-10",
+      "facts": { "nat": "UA", "ua_military_obligation": "yes", "ua_holds_tp": "yes" },
+      "expect": {
+        "statusCounts": { "ok": 26, "unknown": 12, "origin": 1 },
+        "ruleIds": { "DE": "ua-holds", "DK": "ua-dk-other" },
+        "tipsInclude": ["ua-tip-move"],
+        "missing": []
+      }
+    },
+    {
+      "name": "Optional exit proof unanswered → DK unknown, not restricted (undefined never matches)",
+      "today": "2026-10",
+      "facts": { "nat": "UA", "ua_military_obligation": "yes", "ua_holds_tp": "no" },
+      "expect": {
+        "statusCounts": { "ok": 1, "restricted": 25, "origin": 1, "unknown": 12 },
+        "statuses": { "DK": "unknown", "DE": "restricted", "HU": "ok" },
+        "levers": { "ua_exit_proof": { "yes": 25 } },
+        "missing": []
+      }
+    },
+    {
+      "name": "other nationality",
+      "today": "2026-10",
+      "facts": { "nat": "OTHER", "ua_military_obligation": "no", "ua_holds_tp": "no" },
+      "expect": {
+        "statusCounts": { "na": 39 },
+        "missing": []
+      }
+    },
+    {
+      "name": "Unanswered required fact → no colours",
+      "today": "2026-10",
+      "facts": { "nat": "UA" },
+      "expect": {
+        "statusCounts": {},
+        "levers": {},
+        "missing": ["ua_military_obligation", "ua_holds_tp"]
+      }
+    },
+    {
+      "name": "Passport expires before TP ends",
+      "today": "2026-10",
+      "facts": {
+        "nat": "UA", "ua_military_obligation": "yes", "ua_exit_proof": "no", "ua_holds_tp": "no",
+        "passport": "valid", "passport_until": "2028-02"
+      },
+      "expect": { "checks": ["ua-passport-before-tp-end"] }
+    },
+    {
+      "name": "Expired passport hides valid-until",
+      "today": "2026-10",
+      "facts": {
+        "nat": "UA", "ua_military_obligation": "yes", "ua_exit_proof": "no", "ua_holds_tp": "no",
+        "passport": "expired", "passport_until": "2027-01"
+      },
+      "expect": { "checks": ["ua-passport-expired"], "tipsInclude": ["ua-tip-passport-expired"] }
+    }
+  ]
+}

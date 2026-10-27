@@ -1,0 +1,58 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+   Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
+
+   Colour variables the Rights Map stylesheet reads from the site theme, with
+   the light and dark values the live page uses. System fonts replace the site
+   fonts. The demo has no site header, so the map fills the viewport. */
+
+:root {
+  --bg: #FFFFFF;
+  --bg-page: #F8F8F6;
+  --surface: #F5F5F3;
+  --border: rgba(0,0,0,0.06);
+  --border-strong: rgba(0,0,0,0.12);
+  --text-primary: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --text-tertiary: #8F8F8F;
+  --brand: #F2B820;
+  --accent: #0F766E;
+  --accent-hover: #0D6660;
+  --accent-light: rgba(15,118,110,0.12);
+  --accent-border: rgba(15,118,110,0.30);
+  --accent-on: #FFFFFF;
+  --accent-text: #0F766E;
+  --success: #2D8A4E;
+  --warning-text: #8A7410;
+  --focus-ring: #005FCC;
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
+  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --topbar-h: 0px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: rgb(18 18 18);
+    --bg-page: #0E0E0E;
+    --surface: #1E1E1E;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.12);
+    --text-primary: #E8E8E8;
+    --text-secondary: #A0A0A0;
+    --text-tertiary: #6A6A6A;
+    --brand: #F2B820;
+    --accent: #2DA89C;
+    --accent-hover: #36C0B2;
+    --accent-light: rgba(45,168,156,0.18);
+    --accent-border: rgba(45,168,156,0.36);
+    --accent-on: #0E0E0E;
+    --accent-text: #2DA89C;
+    --success: #4CAF6E;
+    --warning-text: #F2B820;
+    --focus-ring: #66B3FF;
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.40);
+  }
+}
+
+html, body { margin: 0; padding: 0; background: var(--bg-page); color: var(--text-primary); }
+*, *::before, *::after { box-sizing: border-box; }

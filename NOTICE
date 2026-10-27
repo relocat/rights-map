@@ -1,0 +1,30 @@
+Relocat Rights Map: third-party notices
+=======================================
+
+The program code is licensed under GPL-3.0-or-later (LICENSE). Our rights data
+is licensed under CC BY 4.0 (LICENSE-DATA). The geographic data in
+web/static/geo/v1/ and geo/inputs/ is derived from the sources below, which
+keep their own licences. Exact source versions and hashes are pinned in
+geo/sources.lock.json (see geo/README.md) and the manifest at
+web/static/geo/v1/manifest.json.
+
+Natural Earth (public domain)
+  Admin 0 countries (including the Ukraine point of view), Admin 1 states and
+  provinces, and 1:50m land, version 5.1.1. https://www.naturalearthdata.com
+
+GeoNames (CC BY 4.0)
+  City names and positions (cities15000), filtered to the covered countries.
+  https://www.geonames.org, licence: https://creativecommons.org/licenses/by/4.0/
+
+BKG VG250 (dl-de/by-2-0)
+  District boundaries of Germany (l2/DE.json):
+  © BKG (2026) dl-de/by-2-0, Datenquellen:
+  https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf
+  Data changed: geometry simplified and reprojected.
+  Licence: https://www.govdata.de/dl-de/by-2-0
+
+Test fixtures and conformance JSON under tests/ are part of the program and
+are licensed GPL-3.0-or-later.
+
+The name Relocat and the Relocat logo are trademarks and are not licensed
+under the GPL or CC BY; forks must use a different name. See TRADEMARKS.md.

@@ -1,0 +1,1 @@
+{"features":[{"geometry":{"coordinates":[11.967,57.707],"type":"Point"},"properties":{"capital":false,"iso2":"SE","name":"Gothenburg","population":608462},"type":"Feature"},{"geometry":{"coordinates":[13.001,55.606],"type":"Point"},"properties":{"capital":false,"iso2":"SE","name":"Malmö","population":362133},"type":"Feature"}],"type":"FeatureCollection"}

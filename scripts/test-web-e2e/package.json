@@ -1,0 +1,9 @@
+{
+  "name": "rights-map-browser-test",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Playwright dependency of the Rights Map browser test.",
+  "devDependencies": {
+    "playwright": "1.60.0"
+  }
+}

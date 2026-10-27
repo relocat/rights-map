@@ -1,0 +1,319 @@
+{
+  "description": "Two requirements share an id.",
+  "kind": "rules",
+  "expect": [
+    "duplicate"
+  ],
+  "document": {
+    "schema": "relocat-rights-map/rules@1",
+    "fact_schema": 1,
+    "generated": "2026-10-27",
+    "licence": "CC-BY-4.0",
+    "attribution": "Fixture",
+    "groups": {
+      "EU27": [
+        "DE",
+        "FR"
+      ],
+      "COVERED": [
+        "DE",
+        "FR",
+        "UA"
+      ]
+    },
+    "sources": {
+      "s1": {
+        "label": "Source one",
+        "url": "https://example.org/one",
+        "kind": "primary"
+      },
+      "s2": {
+        "label": "Source two",
+        "url": "https://example.org/two",
+        "kind": "news"
+      }
+    },
+    "facts": [
+      {
+        "id": "nat",
+        "scope": "profile",
+        "type": "enum",
+        "label": "Nationality",
+        "options": [
+          [
+            "UA",
+            "Ukrainian"
+          ],
+          [
+            "OTHER",
+            "Other"
+          ]
+        ]
+      },
+      {
+        "id": "passport",
+        "scope": "profile",
+        "type": "enum",
+        "label": "Passport",
+        "options": [
+          [
+            "expired",
+            "Expired"
+          ],
+          [
+            "valid",
+            "Valid"
+          ]
+        ],
+        "companion": "passport_until"
+      },
+      {
+        "id": "passport_until",
+        "scope": "profile",
+        "type": "month",
+        "label": "Valid until",
+        "parent": {
+          "fact": "passport",
+          "equals": "valid"
+        }
+      },
+      {
+        "id": "arrived",
+        "scope": "profile",
+        "type": "year",
+        "label": "Arrived"
+      },
+      {
+        "id": "level",
+        "scope": "profile",
+        "type": "enum",
+        "ordered": true,
+        "label": "Level",
+        "options": [
+          [
+            "A1",
+            "A1"
+          ],
+          [
+            "B1",
+            "B1"
+          ]
+        ]
+      },
+      {
+        "id": "unused",
+        "scope": "profile",
+        "type": "bool",
+        "label": "Unused",
+        "options": [
+          [
+            "yes",
+            "Yes"
+          ],
+          [
+            "no",
+            "No"
+          ]
+        ]
+      }
+    ],
+    "migrations": [],
+    "topics": [
+      {
+        "id": "t1",
+        "title": "Topic one",
+        "summary": "Summary",
+        "data_badge": "verified",
+        "defaults": {
+          "nat": "UA",
+          "passport_until": "2027-05",
+          "arrived": "2024"
+        },
+        "labels": {
+          "ok": "Ok"
+        },
+        "uses": [
+          {
+            "fact": "nat",
+            "role": "about"
+          },
+          {
+            "fact": "passport",
+            "role": "documents"
+          },
+          {
+            "fact": "arrived",
+            "role": "about"
+          },
+          {
+            "fact": "level",
+            "role": "lever"
+          }
+        ],
+        "rules": [
+          {
+            "id": "r1",
+            "countries": "EU27",
+            "when": {
+              "nat": [
+                "UA"
+              ],
+              "passport_until": {
+                "gte": "today+6m"
+              },
+              "arrived": {
+                "lt": "2025"
+              }
+            },
+            "status": "ok",
+            "detail": {
+              "reason": "Because.",
+              "sources": [
+                "s1"
+              ],
+              "last_verified": "2026-10-01"
+            }
+          },
+          {
+            "id": "r2",
+            "countries": [
+              "FR",
+              "UA"
+            ],
+            "when": {
+              "level": {
+                "gte": "B1"
+              }
+            },
+            "status": "unknown",
+            "detail": {
+              "reason": "Not verified."
+            }
+          }
+        ],
+        "tips": [
+          {
+            "id": "tip1",
+            "when": {
+              "passport": [
+                "expired"
+              ]
+            },
+            "text": "Renew.",
+            "sources": [
+              "s2"
+            ]
+          }
+        ],
+        "checks": [
+          {
+            "id": "chk1",
+            "when": {
+              "passport": [
+                "expired"
+              ]
+            },
+            "severity": "warning",
+            "text": "Expired."
+          }
+        ]
+      },
+      {
+        "id": "t-auth",
+        "title": "Authority topic",
+        "summary": "Summary",
+        "data_badge": "pilot",
+        "granularity": "authority",
+        "authorities_file": "authorities.de.v1.json",
+        "country": "DE",
+        "uses": [
+          {
+            "fact": "arrived",
+            "role": "about"
+          },
+          {
+            "fact": "level",
+            "role": "lever"
+          }
+        ],
+        "derived": {
+          "eligible_from": "arrived + 5y",
+          "apply": "max(eligible_from, today)",
+          "decision": "apply + authority.total"
+        },
+        "requirements": [
+          {
+            "id": "req1",
+            "title": "Residence",
+            "met": {
+              "arrived": {
+                "lte": "today-5y"
+              }
+            },
+            "sources": [
+              "s1"
+            ]
+          },
+          {
+            "id": "req2",
+            "title": "German",
+            "met": {
+              "level": {
+                "gte": "B1"
+              }
+            }
+          },
+          {
+            "id": "req3",
+            "title": "Info only",
+            "info": true
+          },
+          {
+            "id": "req2",
+            "title": "German",
+            "met": {
+              "level": {
+                "gte": "B1"
+              }
+            }
+          }
+        ],
+        "tips": [
+          {
+            "id": "tip-a",
+            "when": {
+              "level": [
+                "A1"
+              ]
+            },
+            "text": "Learn."
+          }
+        ],
+        "checks": [
+          {
+            "id": "chk-a",
+            "when": {
+              "arrived": {
+                "gte": "milestone:eligible_from"
+              }
+            },
+            "severity": "warning",
+            "text": "Early."
+          }
+        ],
+        "colour": {
+          "metric_options": [
+            "total"
+          ],
+          "buckets_months": [
+            6,
+            12,
+            24,
+            36
+          ],
+          "confirmed_if": "official"
+        }
+      }
+    ]
+  }
+}

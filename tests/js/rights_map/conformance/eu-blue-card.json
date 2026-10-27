@@ -1,0 +1,56 @@
+{
+  "topic": "eu-blue-card",
+  "cases": [
+    {
+      "name": "Nothing answered → missing",
+      "today": "2026-10",
+      "facts": {},
+      "expect": { "statusCounts": {}, "missing": ["degree", "bc_job_offer"] }
+    },
+    {
+      "name": "Uni + offer → DE ok",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "yes" },
+      "expect": {
+        "statusCounts": { "ok": 1, "blocked": 2, "unknown": 24, "na": 12 },
+        "statuses": { "DE": "ok", "DK": "blocked", "IE": "blocked", "FR": "unknown", "NO": "na" }
+      }
+    },
+    {
+      "name": "Vocational + offer → DE restricted",
+      "today": "2026-10",
+      "facts": { "degree": "voc", "bc_job_offer": "yes" },
+      "expect": { "statuses": { "DE": "restricted" }, "levers": { "degree": { "uni": 1 } } }
+    },
+    {
+      "name": "Uni, no offer → DE restricted",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "no" },
+      "expect": { "statuses": { "DE": "restricted" }, "levers": { "bc_job_offer": { "yes": 1 } } }
+    },
+    {
+      "name": "B1 tip shown below B1",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "yes", "german": "A2" },
+      "expect": { "tipsInclude": ["bc-tip-b1"] }
+    },
+    {
+      "name": "B1 tip hidden at B1",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "yes", "german": "B1" },
+      "expect": { "tipsExclude": ["bc-tip-b1"] }
+    },
+    {
+      "name": "Passport valid less than 18 months",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "yes", "passport": "valid", "passport_until": "2028-03" },
+      "expect": { "checks": ["bc-passport-short"] }
+    },
+    {
+      "name": "Passport valid exactly 18 months (boundary, lt)",
+      "today": "2026-10",
+      "facts": { "degree": "uni", "bc_job_offer": "yes", "passport": "valid", "passport_until": "2028-04" },
+      "expect": { "checks": [] }
+    }
+  ]
+}

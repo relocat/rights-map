@@ -1,0 +1,65 @@
+{
+  "cities": {
+    "snapshot": {
+      "fetched": "2026-10-20",
+      "sha256": "a839fd6af3d55e5d41d2e281d481b7c0887cc9f2bc536723708843ef01e70ea8"
+    },
+    "url": "https://download.geonames.org/export/dump/cities15000.zip"
+  },
+  "sources": {
+    "ne_10m_admin_0_countries": {
+      "archive": "ne_10m_admin_0_countries.zip",
+      "attribution": "Natural Earth",
+      "licence": "Public domain",
+      "sha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
+      "title": "Natural Earth 1:10m Admin 0 - Countries (default; Kosovo polygon only)",
+      "url": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
+      "version": "5.1.1"
+    },
+    "ne_10m_admin_0_countries_ukr": {
+      "archive": "ne_10m_admin_0_countries_ukr.zip",
+      "attribution": "Natural Earth",
+      "licence": "Public domain",
+      "sha256": "6fcdaed26c8d551018fbd3b97185df863a4f15f489e602fceae1dee90d6a5ae8",
+      "title": "Natural Earth 1:10m Admin 0 - Countries (Ukraine point of view)",
+      "url": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries_ukr.zip",
+      "version": "5.1.1"
+    },
+    "ne_10m_admin_1_states_provinces": {
+      "archive": "ne_10m_admin_1_states_provinces.zip",
+      "attribution": "Natural Earth",
+      "licence": "Public domain",
+      "sha256": "efc59726337323058f9446210adc96673179cd344e053666ee3d28cb58ba2b05",
+      "title": "Natural Earth 1:10m Admin 1 - States, Provinces",
+      "url": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces.zip",
+      "version": "5.1.1"
+    },
+    "vg250_krs": {
+      "archive": "vg250_01-01.utm32s.shape.ebenen.zip",
+      "attribution": "© BKG (2026) dl-de/by-2-0",
+      "datasources_url": "https://sgx.geodatenzentrum.de/web_public/gdz/datenquellen/datenquellen_vg_nuts.pdf",
+      "dataset_url": "https://gdz.bkg.bund.de",
+      "licence": "dl-de/by-2-0",
+      "licence_url": "https://www.govdata.de/dl-de/by-2-0",
+      "members": [
+        "*VG250_KRS.*"
+      ],
+      "modified": "Data changed: geometry simplified and reprojected.",
+      "provider_url": "https://www.bkg.bund.de",
+      "sha256": "a21bd17e3616fded6a1cae3311f6b0e8f156ba3939d113b8b760fec5664dd529",
+      "shapefile": "vg250_ebenen_0101/VG250_KRS.shp",
+      "title": "BKG VG250 Verwaltungsgebiete 1:250 000, Kreise (01.01.2026, UTM32 EPSG:25832, reprojected to WGS84)",
+      "url": "https://daten.gdz.bkg.bund.de/produkte/vg/vg250_ebenen_0101/2026/vg250_01-01.utm32s.shape.ebenen.zip",
+      "version": "2026-01-01"
+    },
+    "ne_50m_land": {
+      "archive": "ne_50m_land.zip",
+      "attribution": "Natural Earth",
+      "licence": "Public domain",
+      "sha256": "0b8e670cf80dce9cbebe2a193bc44ba5602758c22e1fa603980553646d7ff162",
+      "title": "Natural Earth 1:50m Land",
+      "url": "https://naciscdn.org/naturalearth/50m/physical/ne_50m_land.zip",
+      "version": "5.1.1"
+    }
+  }
+}

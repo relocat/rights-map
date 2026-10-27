@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors -->
+<!--
+  Static demo shell for the Rights Map. It carries the same data-* contract as the
+  production page: reports, experiences and community figures are off, and every
+  server URL is empty. No inline script or style, so a strict CSP holds.
+  Serve the repository root (for example `npx serve .`) and open /demo/.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rights map demo</title>
+  <meta name="description" content="Check what your passport, residence status and plans mean for your rights across Europe. General information, not legal advice.">
+  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="../web/static/public/rights_map/rights_map.css">
+</head>
+<body>
+<main id="main-content"><div id="rights-map" class="rm-root"
+     data-static-base="../web/static/public/rights_map/"
+     data-geo-base="../web/static/geo/v1/"
+     data-version="demo"
+     data-reports-enabled="false"
+     data-experiences-enabled="false"
+     data-de-pilot-enabled="true"
+     data-community-enabled="false"
+     data-community-url=""
+     data-status-url=""
+     data-stale-after-days="30"
+     data-report-challenge-url=""
+     data-report-submit-url=""
+     data-experience-challenge-url=""
+     data-experience-submit-url=""
+     data-experience-privacy-url="">
+  <noscript><p>The rights map needs JavaScript. General information, not legal advice.</p></noscript>
+  <div class="rm-map" aria-hidden="true"></div>
+</div></main>
+<script type="module" src="../web/static/public/rights_map/map-app.js"></script>
+</body>
+</html>

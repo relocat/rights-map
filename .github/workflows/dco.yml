@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
+#
+# Developer Certificate of Origin check. Fails when any non-merge commit in the
+# pull request lacks a `Signed-off-by: Name <email>` trailer (`git commit -s`).
+# Commit messages are read by git inside the job and never interpolated into
+# the shell.
+name: DCO
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  dco:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Require Signed-off-by on every commit
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          # Fail closed: a rev-list error aborts (assignment trips -e), and an
+          # empty range for a pull request that has commits is an error too.
+          commits=$(git rev-list --no-merges "${BASE_SHA}..${HEAD_SHA}")
+          total=$(git rev-list --count "${BASE_SHA}..${HEAD_SHA}")
+          if [ -z "$commits" ] && [ "$total" -gt 0 ]; then
+            echo "::error::Could not list the pull request's commits"
+            exit 1
+          fi
+          missing=0
+          for sha in $commits; do
+            if ! git show -s --format=%B "$sha" | grep -qE '^Signed-off-by: .+ <[^<>@[:space:]]+@[^<>[:space:]]+>$'; then
+              echo "::error::Commit ${sha:0:12} has no Signed-off-by trailer. Amend with: git commit -s --amend"
+              missing=1
+            fi
+          done
+          exit "$missing"

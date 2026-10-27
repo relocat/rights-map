@@ -1,0 +1,1133 @@
+{
+ "schema": "relocat-rights-map/rules@1",
+ "fact_schema": 1,
+ "generated": "2026-10-20",
+ "licence": "CC-BY-4.0",
+ "attribution": "Relocat Rights Map rules data (relocat.org/map)",
+ "groups": {
+  "EU27": [
+   "AT",
+   "BE",
+   "BG",
+   "HR",
+   "CY",
+   "CZ",
+   "DK",
+   "EE",
+   "FI",
+   "FR",
+   "DE",
+   "GR",
+   "HU",
+   "IE",
+   "IT",
+   "LV",
+   "LT",
+   "LU",
+   "MT",
+   "NL",
+   "PL",
+   "PT",
+   "RO",
+   "SK",
+   "SI",
+   "ES",
+   "SE"
+  ],
+  "COVERED": [
+   "AT",
+   "BE",
+   "BG",
+   "HR",
+   "CY",
+   "CZ",
+   "DK",
+   "EE",
+   "FI",
+   "FR",
+   "DE",
+   "GR",
+   "HU",
+   "IE",
+   "IT",
+   "LV",
+   "LT",
+   "LU",
+   "MT",
+   "NL",
+   "PL",
+   "PT",
+   "RO",
+   "SK",
+   "SI",
+   "ES",
+   "SE",
+   "IS",
+   "NO",
+   "CH",
+   "LI",
+   "GB",
+   "UA",
+   "MD",
+   "RS",
+   "BA",
+   "ME",
+   "MK",
+   "AL"
+  ]
+ },
+ "sources": {
+  "eurlex-2001-55": {
+   "label": "Council Directive 2001/55/EC (temporary protection), Art. 17 · EUR-Lex",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32001L0055",
+   "kind": "primary"
+  },
+  "eurlex-2026-1912": {
+   "label": "Council Implementing Decision (EU) 2026/1912 · EUR-Lex",
+   "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202601912",
+   "kind": "primary"
+  },
+  "unhcr-hu-tp": {
+   "label": "UNHCR Help Hungary · Temporary Protection",
+   "url": "https://help.unhcr.org/hungary/temporary-protection/",
+   "kind": "authority"
+  },
+  "visitukraine-9700": {
+   "label": "Visit Ukraine · Hungary keeps protection for all",
+   "url": "https://visitukraine.today/blog/9700/protection-for-all-ukrainians-hungary-refuses-to-comply-with-new-eu-restrictions",
+   "kind": "news"
+  },
+  "novinite-239275": {
+   "label": "Novinite · EU extends protection, restricts entry",
+   "url": "https://www.novinite.com/view_news.php?id=239275",
+   "kind": "news"
+  },
+  "mig-bluecard": {
+   "label": "Make it in Germany · EU Blue Card",
+   "url": "https://www.make-it-in-germany.com/en/visa-residence/types/eu-blue-card",
+   "kind": "authority"
+  },
+  "aufenthv-5": {
+   "label": "§ 5 AufenthV · gesetze-im-internet.de",
+   "url": "https://www.gesetze-im-internet.de/aufenthv/__5.html",
+   "kind": "primary"
+  },
+  "bverwg-1c27-24": {
+   "label": "BVerwG 18 Dec 2025, 1 C 27.24 · press release 98/2025",
+   "url": "https://www.bverwg.de/pm/2025/98",
+   "kind": "primary"
+  },
+  "zdf-turbo": {
+   "label": "ZDFheute · Bundestag abolishes 3-year fast track (8 Oct 2025)",
+   "url": "https://www.zdfheute.de/politik/deutschland/einbuergerung-beschleunigung-verfahren-bundestag-100.html",
+   "kind": "news"
+  },
+  "eprs-2026-791473": {
+   "label": "EPRS briefing · Temporary protection extended until March 2028 (quotes Decision 2026/1912, Art. 2)",
+   "url": "https://eprs.europarl.europa.eu/contents/publications/EPRS/2026/09/EPRS_BRI(2026)791473.html",
+   "kind": "authority"
+  },
+  "aufenthg-18g": {
+   "label": "§ 18g AufenthG (Blaue Karte EU) · gesetze-im-internet.de",
+   "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__18g.html",
+   "kind": "primary"
+  },
+  "aufenthg-18c": {
+   "label": "§ 18c AufenthG (Niederlassungserlaubnis) · gesetze-im-internet.de",
+   "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__18c.html",
+   "kind": "primary"
+  },
+  "aufenthg-2": {
+   "label": "§ 2 AufenthG (language-level definitions) · gesetze-im-internet.de",
+   "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__2.html",
+   "kind": "primary"
+  }
+ },
+ "facts": [
+  {
+   "id": "nat",
+   "scope": "profile",
+   "type": "enum",
+   "label": "Nationality",
+   "options": [
+    [
+     "UA",
+     "Ukrainian"
+    ],
+    [
+     "BY",
+     "Belarusian"
+    ],
+    [
+     "OTHER",
+     "Other"
+    ]
+   ],
+   "group": "about",
+   "sensitivity": "high",
+   "required": true
+  },
+  {
+   "id": "passport",
+   "scope": "profile",
+   "type": "enum",
+   "label": "Passport",
+   "options": [
+    [
+     "expired",
+     "Expired"
+    ],
+    [
+     "valid",
+     "Valid"
+    ]
+   ],
+   "group": "documents",
+   "companion": "passport_until",
+   "sensitivity": "high"
+  },
+  {
+   "id": "passport_until",
+   "scope": "profile",
+   "type": "month",
+   "label": "Valid until",
+   "parent": {
+    "fact": "passport",
+    "equals": "valid"
+   },
+   "sensitivity": "high"
+  },
+  {
+   "id": "apostille",
+   "scope": "profile",
+   "type": "enum",
+   "label": "Apostille or legalisation from home",
+   "options": [
+    [
+     "yes",
+     "Available"
+    ],
+    [
+     "no",
+     "Not possible"
+    ]
+   ],
+   "group": "documents",
+   "sensitivity": "high"
+  },
+  {
+   "id": "degree",
+   "scope": "profile",
+   "type": "enum",
+   "ordered": true,
+   "label": "Highest education (recognised)",
+   "options": [
+    [
+     "none",
+     "None"
+    ],
+    [
+     "voc",
+     "Vocational"
+    ],
+    [
+     "uni",
+     "University"
+    ]
+   ],
+   "group": "lever",
+   "lever": true
+  },
+  {
+   "id": "german",
+   "scope": "profile",
+   "type": "enum",
+   "ordered": true,
+   "label": "German certificate",
+   "options": [
+    [
+     "none",
+     "None"
+    ],
+    [
+     "A1",
+     "A1"
+    ],
+    [
+     "A2",
+     "A2"
+    ],
+    [
+     "B1",
+     "B1"
+    ],
+    [
+     "B2",
+     "B2 or higher"
+    ]
+   ],
+   "group": "lever",
+   "lever": true
+  },
+  {
+   "id": "de_residence_since",
+   "scope": "profile",
+   "type": "year",
+   "label": "Living lawfully in Germany since",
+   "group": "about",
+   "required": true
+  },
+  {
+   "id": "ua_military_obligation",
+   "scope": "topic",
+   "type": "bool",
+   "label": "Ukrainian military obligation applies to me",
+   "options": [
+    [
+     "yes",
+     "Yes"
+    ],
+    [
+     "no",
+     "No"
+    ]
+   ],
+   "group": "about",
+   "sensitivity": "high",
+   "required": true
+  },
+  {
+   "id": "ua_holds_tp",
+   "scope": "topic",
+   "type": "bool",
+   "label": "I already hold EU temporary protection, without a break",
+   "options": [
+    [
+     "yes",
+     "Yes"
+    ],
+    [
+     "no",
+     "No"
+    ]
+   ],
+   "group": "about",
+   "required": true
+  },
+  {
+   "id": "ua_exit_proof",
+   "scope": "topic",
+   "type": "bool",
+   "label": "Proof of legal exit (stamp, official paper, Reserv+)",
+   "options": [
+    [
+     "no",
+     "Not yet"
+    ],
+    [
+     "yes",
+     "I have it"
+    ]
+   ],
+   "group": "lever",
+   "lever": true,
+   "sensitivity": "high"
+  },
+  {
+   "id": "bc_job_offer",
+   "scope": "topic",
+   "type": "bool",
+   "label": "Binding job offer above the salary threshold",
+   "options": [
+    [
+     "no",
+     "Not yet"
+    ],
+    [
+     "yes",
+     "I have it"
+    ]
+   ],
+   "group": "lever",
+   "lever": true
+  },
+  {
+   "id": "de_nat_test",
+   "scope": "topic",
+   "type": "bool",
+   "label": "Naturalisation test (Leben in Deutschland) passed",
+   "options": [
+    [
+     "no",
+     "Not yet"
+    ],
+    [
+     "yes",
+     "Passed"
+    ]
+   ],
+   "group": "lever",
+   "lever": true
+  },
+  {
+   "id": "de_own_livelihood",
+   "scope": "topic",
+   "type": "bool",
+   "label": "Living without Bürgergeld or social assistance",
+   "options": [
+    [
+     "no",
+     "Not yet"
+    ],
+    [
+     "yes",
+     "Yes"
+    ]
+   ],
+   "group": "lever",
+   "lever": true
+  }
+ ],
+ "migrations": [],
+ "topics": [
+  {
+   "id": "ua-tp",
+   "title": "Ukrainian temporary protection",
+   "summary": "Who still gets protection after the August 2026 rule change",
+   "data_badge": "verified",
+   "defaults": {
+    "nat": "UA",
+    "ua_military_obligation": "yes",
+    "ua_holds_tp": "no"
+   },
+   "labels": {
+    "ok": "Protection available",
+    "restricted": "Restricted for you",
+    "blocked": "Not available",
+    "unknown": "No verified data",
+    "na": "Not applicable",
+    "origin": "Your nationality"
+   },
+   "rules": [
+    {
+     "id": "ua-na",
+     "countries": "COVERED",
+     "when": {
+      "nat": [
+       "OTHER"
+      ]
+     },
+     "status": "na",
+     "detail": {
+      "reason": "This topic applies to Ukrainian nationals."
+     }
+    },
+    {
+     "id": "ua-origin",
+     "countries": [
+      "UA"
+     ],
+     "when": {},
+     "status": "origin",
+     "detail": {
+      "reason": "Your country of nationality."
+     }
+    },
+    {
+     "id": "ua-dk-affected",
+     "countries": [
+      "DK"
+     ],
+     "when": {
+      "ua_military_obligation": [
+       "yes"
+      ],
+      "ua_exit_proof": [
+       "no"
+      ],
+      "ua_holds_tp": [
+       "no"
+      ]
+     },
+     "status": "restricted",
+     "detail": {
+      "reason": "Denmark runs its own scheme outside the EU directive and adopted a comparable restriction for military-age men.",
+      "caveat": "Confirmed by news reports only: for applications from 25 June 2026, men aged 23 to 59 need documented military exemption. The primary Danish source (Danish Immigration Service) is not verified.",
+      "basis": [],
+      "sources": [
+       "novinite-239275"
+      ],
+      "effective": "2026",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-dk-other",
+     "countries": [
+      "DK"
+     ],
+     "when": {},
+     "status": "unknown",
+     "detail": {
+      "reason": "Denmark runs its own scheme outside the EU directive. Its rules for your situation are not verified yet."
+     }
+    },
+    {
+     "id": "ua-holds",
+     "countries": "EU27",
+     "when": {
+      "ua_holds_tp": [
+       "yes"
+      ]
+     },
+     "status": "ok",
+     "detail": {
+      "reason": "People who already held temporary protection and kept it without a break are not affected by the new requirement. Protection runs to 4 March 2028.",
+      "caveat": "The decision protects people who held protection before or on 4 August 2026 and keep it in the same member state. Whether the exemption carries over when you move to another EU state is not verified yet.",
+      "basis": [
+       "Council Implementing Decision (EU) 2026/1912"
+      ],
+      "sources": [
+       "eurlex-2026-1912",
+       "eprs-2026-791473"
+      ],
+      "effective": "2026-08-05",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-not-affected",
+     "countries": "EU27",
+     "when": {
+      "ua_military_obligation": [
+       "no"
+      ]
+     },
+     "status": "ok",
+     "detail": {
+      "reason": "Temporary protection is extended to 4 March 2028. The new exit-proof requirement does not apply to you.",
+      "basis": [
+       "Council Implementing Decision (EU) 2026/1912"
+      ],
+      "sources": [
+       "eurlex-2026-1912",
+       "eprs-2026-791473"
+      ],
+      "effective": "2026-08-05",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-exit-proof",
+     "countries": "EU27",
+     "when": {
+      "ua_exit_proof": [
+       "yes"
+      ]
+     },
+     "status": "ok",
+     "detail": {
+      "reason": "Temporary protection is extended to 4 March 2028. With proof of a legal exit, the new requirement is met.",
+      "basis": [
+       "Council Implementing Decision (EU) 2026/1912"
+      ],
+      "sources": [
+       "eurlex-2026-1912",
+       "eprs-2026-791473"
+      ],
+      "effective": "2026-08-05",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-hu-discretion",
+     "countries": [
+      "HU"
+     ],
+     "when": {},
+     "status": "ok",
+     "detail": {
+      "reason": "Hungary told the European Commission it will use the discretion EU law allows and keep granting temporary protection to Ukrainians who cannot prove they fulfilled their military obligations.",
+      "caveat": "Each application is still decided individually. This is not a guarantee. Confirmed by news reports and a second-hand UNHCR quote only; the Hungarian text is not verified.",
+      "basis": [
+       "Government Resolution 145/2026 of 4 September (HU), as reported",
+       "Council Implementing Decision (EU) 2026/1912"
+      ],
+      "sources": [
+       "unhcr-hu-tp",
+       "visitukraine-9700"
+      ],
+      "effective": "2026-08-05",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-eu-rule",
+     "countries": "EU27",
+     "when": {},
+     "status": "restricted",
+     "detail": {
+      "reason": "Since 5 August 2026, new applicants must show they fulfilled Ukrainian military obligations or left legally. Without that, temporary protection is not granted. An individual asylum application remains possible.",
+      "caveat": "How this country checks exit proof is not verified yet. That an individual asylum application remains possible is not verified in the cited sources.",
+      "basis": [
+       "Council Implementing Decision (EU) 2026/1912"
+      ],
+      "sources": [
+       "eurlex-2026-1912",
+       "eprs-2026-791473"
+      ],
+      "effective": "2026-08-05",
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "ua-non-eu",
+     "countries": "COVERED",
+     "when": {},
+     "status": "unknown",
+     "detail": {
+      "reason": "Not part of the EU temporary protection scheme. National rules are not researched yet."
+     }
+    }
+   ],
+   "tips": [
+    {
+     "id": "ua-tip-asylum",
+     "when": {
+      "nat": [
+       "UA"
+      ],
+      "ua_military_obligation": [
+       "yes"
+      ],
+      "ua_exit_proof": [
+       "no"
+      ],
+      "ua_holds_tp": [
+       "no"
+      ]
+     },
+     "tag": "Fallback",
+     "text": "Asylum stays open in every EU state, decided case by case. Legal-aid services advise on an individual application before travel.",
+     "sources": [
+      "eurlex-2001-55"
+     ],
+     "status": "verified-partial"
+    },
+    {
+     "id": "ua-tip-move",
+     "when": {
+      "nat": [
+       "UA"
+      ],
+      "ua_holds_tp": [
+       "yes"
+      ]
+     },
+     "tag": "Caveat",
+     "text": "The exemption covers holders without a break in status. Whether it survives a move to another EU state is not verified yet.",
+     "status": "verified"
+    },
+    {
+     "id": "ua-tip-passport-expired",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "tag": "Documents",
+     "text": "Whether an expired passport is accepted for a new temporary-protection application is not researched yet. In Germany, fulfilling military service counts as a reasonable step to get a new passport unless there are compelling reasons against it.",
+     "sources": [
+      "aufenthv-5"
+     ],
+     "status": "verified-partial"
+    }
+   ],
+   "uses": [
+    {
+     "fact": "nat",
+     "role": "about"
+    },
+    {
+     "fact": "ua_military_obligation",
+     "role": "about"
+    },
+    {
+     "fact": "ua_holds_tp",
+     "role": "about"
+    },
+    {
+     "fact": "passport",
+     "role": "documents"
+    },
+    {
+     "fact": "apostille",
+     "role": "documents"
+    },
+    {
+     "fact": "ua_exit_proof",
+     "role": "lever"
+    }
+   ],
+   "checks": [
+    {
+     "id": "ua-passport-expired",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "severity": "warning",
+     "text": "Your passport has expired. Most procedures need a valid passport or a replacement document."
+    },
+    {
+     "id": "ua-passport-before-tp-end",
+     "when": {
+      "passport": [
+       "valid"
+      ],
+      "passport_until": {
+       "lt": "2028-03"
+      }
+     },
+     "severity": "warning",
+     "text": "Your passport expires in {passport_until}, before temporary protection ends (4 Mar 2028). A renewal would fall within the protection period."
+    }
+   ]
+  },
+  {
+   "id": "eu-blue-card",
+   "title": "EU Blue Card",
+   "summary": "Work permit for graduates with a job offer",
+   "data_badge": "draft",
+   "defaults": {
+    "degree": "uni",
+    "bc_job_offer": "no"
+   },
+   "labels": {
+    "ok": "Eligible",
+    "restricted": "Conditions missing",
+    "blocked": "Not offered",
+    "unknown": "Not researched yet",
+    "na": "No EU Blue Card",
+    "origin": "Your nationality"
+   },
+   "rules": [
+    {
+     "id": "bc-optout",
+     "countries": [
+      "DK",
+      "IE"
+     ],
+     "when": {},
+     "status": "blocked",
+     "draft": true,
+     "detail": {
+      "reason": "Not part of the EU Blue Card scheme. National work permits exist and are not covered yet.",
+      "last_verified": "draft"
+     }
+    },
+    {
+     "id": "bc-de-nodegree",
+     "countries": [
+      "DE"
+     ],
+     "when": {
+      "degree": [
+       "none",
+       "voc"
+      ]
+     },
+     "status": "restricted",
+     "detail": {
+      "reason": "The standard Blue Card needs a recognised university degree. Germany also has an experience-based route for IT specialists.",
+      "caveat": "The experience-based route needs three years of experience in the last seven years in an ICT occupation group and approval of the Federal Employment Agency (§ 18g para. 2).",
+      "basis": [
+       "§ 18g AufenthG"
+      ],
+      "sources": [
+       "aufenthg-18g",
+       "mig-bluecard"
+      ],
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "bc-de-nooffer",
+     "countries": [
+      "DE"
+     ],
+     "when": {
+      "bc_job_offer": [
+       "no"
+      ]
+     },
+     "status": "restricted",
+     "detail": {
+      "reason": "A binding job offer above the salary threshold is required before you can apply.",
+      "caveat": "The job offer must cover at least six months and match the qualification (§ 18g para. 3).",
+      "basis": [
+       "§ 18g AufenthG"
+      ],
+      "sources": [
+       "aufenthg-18g",
+       "mig-bluecard"
+      ],
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "bc-de-ok",
+     "countries": [
+      "DE"
+     ],
+     "when": {
+      "degree": [
+       "uni"
+      ],
+      "bc_job_offer": [
+       "yes"
+      ]
+     },
+     "status": "ok",
+     "detail": {
+      "reason": "A university degree plus a binding job offer above the salary threshold qualifies. The card itself needs no German.",
+      "caveat": "The salary threshold changes every year and is published in the Federal Gazette. Other conditions of § 18g, such as a job that matches the qualification, also apply.",
+      "basis": [
+       "§ 18g AufenthG"
+      ],
+      "sources": [
+       "aufenthg-18g",
+       "mig-bluecard"
+      ],
+      "last_verified": "2026-10-22"
+     }
+    },
+    {
+     "id": "bc-eu-todo",
+     "countries": "EU27",
+     "when": {},
+     "status": "unknown",
+     "detail": {
+      "reason": "Blue Card rules for this country are not researched yet."
+     }
+    },
+    {
+     "id": "bc-non-eu",
+     "countries": "COVERED",
+     "when": {},
+     "status": "na",
+     "detail": {
+      "reason": "The EU Blue Card exists only in EU member states."
+     }
+    }
+   ],
+   "tips": [
+    {
+     "id": "bc-tip-b1",
+     "when": {
+      "degree": [
+       "uni"
+      ],
+      "bc_job_offer": [
+       "yes"
+      ],
+      "german": {
+       "lt": "B1"
+      }
+     },
+     "tag": "DE · with B1",
+     "text": "With a German B1 certificate, Germany grants the settlement permit after 21 months instead of 27.",
+     "status": "verified",
+     "sources": [
+      "aufenthg-18c",
+      "aufenthg-2"
+     ]
+    },
+    {
+     "id": "bc-tip-recognition",
+     "when": {
+      "degree": [
+       "uni"
+      ]
+     },
+     "tag": "Degree recognition",
+     "text": "A foreign degree needs recognition in Germany. An unrecognised degree counts as no degree.",
+     "status": "draft"
+    },
+    {
+     "id": "bc-tip-reiseausweis",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "tag": "Documents · DE",
+     "text": "A residence title needs a valid passport, so renewal is the normal route. If renewal is impossible or unreasonable for you, the foreigners’ authority can issue a Reiseausweis für Ausländer (§ 5 AufenthV). Applying too late does not count as unreasonable.",
+     "sources": [
+      "aufenthv-5"
+     ],
+     "status": "verified"
+    },
+    {
+     "id": "bc-tip-apostille",
+     "when": {
+      "apostille": [
+       "no"
+      ]
+     },
+     "tag": "Documents",
+     "text": "Degree recognition without an apostille is not researched yet.",
+     "status": "todo"
+    }
+   ],
+   "uses": [
+    {
+     "fact": "passport",
+     "role": "documents"
+    },
+    {
+     "fact": "apostille",
+     "role": "documents"
+    },
+    {
+     "fact": "degree",
+     "role": "lever",
+     "required": true
+    },
+    {
+     "fact": "german",
+     "role": "lever"
+    },
+    {
+     "fact": "bc_job_offer",
+     "role": "lever",
+     "required": true
+    }
+   ],
+   "checks": [
+    {
+     "id": "bc-passport-expired",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "severity": "warning",
+     "text": "Your passport has expired. Most procedures need a valid passport or a replacement document."
+    },
+    {
+     "id": "bc-passport-short",
+     "when": {
+      "passport": [
+       "valid"
+      ],
+      "passport_until": {
+       "lt": "today+18m"
+      }
+     },
+     "severity": "warning",
+     "text": "Your passport expires in {passport_until}. A residence title is normally not issued beyond your passport’s validity, so a passport renewed before the application allows a longer validity.",
+     "status": "to-verify"
+    }
+   ]
+  },
+  {
+   "id": "de-naturalisation",
+   "title": "Naturalisation",
+   "summary": "Requirements and waiting time at your local authority",
+   "data_badge": "pilot",
+   "granularity": "authority",
+   "authorities_file": "authorities.de.v1.json",
+   "country": "DE",
+   "uses": [
+    {
+     "fact": "de_residence_since",
+     "role": "about"
+    },
+    {
+     "fact": "passport",
+     "role": "documents"
+    },
+    {
+     "fact": "apostille",
+     "role": "documents"
+    },
+    {
+     "fact": "german",
+     "role": "lever"
+    },
+    {
+     "fact": "de_nat_test",
+     "role": "lever"
+    },
+    {
+     "fact": "de_own_livelihood",
+     "role": "lever"
+    }
+   ],
+   "derived": {
+    "eligible_from": "de_residence_since + 5y",
+    "apply": "max(eligible_from, today)",
+    "decision": "apply + authority.total"
+   },
+   "requirements": [
+    {
+     "id": "residence",
+     "title": "5 years lawful residence",
+     "met": {
+      "de_residence_since": {
+       "lte": "today-5y"
+      }
+     },
+     "note_unmet": "from {eligible_from}",
+     "sources": [
+      "zdf-turbo"
+     ]
+    },
+    {
+     "id": "german",
+     "title": "German B1",
+     "met": {
+      "german": {
+       "gte": "B1"
+      }
+     }
+    },
+    {
+     "id": "test",
+     "title": "Naturalisation test",
+     "met": {
+      "de_nat_test": [
+       "yes"
+      ]
+     },
+     "note": "or a German school certificate"
+    },
+    {
+     "id": "livelihood",
+     "title": "Own livelihood",
+     "met": {
+      "de_own_livelihood": [
+       "yes"
+      ]
+     },
+     "note": "exceptions exist"
+    },
+    {
+     "id": "convictions",
+     "title": "No relevant convictions",
+     "info": true
+    },
+    {
+     "id": "commitment",
+     "title": "Commitment to the free democratic order",
+     "info": true
+    },
+    {
+     "id": "identity",
+     "title": "Clarified identity and nationality",
+     "met": {
+      "passport": [
+       "valid"
+      ]
+     },
+     "note_unmet": "passport expired, see tips"
+    }
+   ],
+   "legal_notes": [
+    "§ 10 StAG",
+    "3-year fast track abolished by the Bundestag on 8 Oct 2025 (effective date to verify)",
+    "Dual citizenship allowed since 27 Jun 2024",
+    "Fee 255 € per adult (to verify)"
+   ],
+   "tips": [
+    {
+     "id": "nat-tip-identity",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "tag": "Identity",
+     "text": "A passport is the expected proof of identity. If renewal is impossible or unreasonable for you, identity can be proven step by step: other official photo ID, then other official documents such as a birth certificate, then other evidence such as witnesses. A sworn affidavit does not count.",
+     "sources": [
+      "bverwg-1c27-24"
+     ],
+     "status": "verified"
+    },
+    {
+     "id": "nat-tip-apostille",
+     "when": {
+      "apostille": [
+       "no"
+      ]
+     },
+     "tag": "Certificates",
+     "text": "Foreign birth and marriage certificates are usually needed with an apostille or legalisation. What each authority accepts without one is not researched yet.",
+     "status": "todo"
+    }
+   ],
+   "checks": [
+    {
+     "id": "nat-passport-expired",
+     "when": {
+      "passport": [
+       "expired"
+      ]
+     },
+     "severity": "warning",
+     "text": "Your passport has expired. You need a valid passport, or proof of identity without one, to apply."
+    },
+    {
+     "id": "nat-passport-before-apply",
+     "when": {
+      "passport": [
+       "valid"
+      ],
+      "passport_until": {
+       "lt": "milestone:apply"
+      }
+     },
+     "severity": "warning",
+     "text": "Your passport expires in {passport_until}, before you can apply. A passport valid on the application date is normally required."
+    },
+    {
+     "id": "nat-passport-before-decision",
+     "when": {
+      "passport": [
+       "valid"
+      ],
+      "passport_until": {
+       "lt": "milestone:decision"
+      }
+     },
+     "severity": "warning",
+     "text": "Your passport expires in {passport_until}, before the expected decision ({decision}). A renewal would fall within the procedure."
+    }
+   ],
+   "colour": {
+    "metric_options": [
+     "total",
+     "wait",
+     "proc"
+    ],
+    "buckets_months": [
+     6,
+     12,
+     24,
+     36
+    ],
+    "confirmed_if": "official and age<=12 months, or community n>=5; else striped"
+   }
+  }
+ ],
+ "notes": [
+  "Rules are evaluated top-down per country; first match wins. A country covered by no matching rule is 'unknown'.",
+  "'when' maps fact id -> allowed values; all listed facts must match. Empty 'when' always matches.",
+  "Rule order in ua-tp encodes precedence: nationality, origin, Denmark special case, unaffected groups, Hungary discretion, EU default, non-EU.",
+  "Rules marked draft must render with a 'draft / to verify' caveat. Schema should reject a non-unknown/na status without sources unless draft is true.",
+  "Conditions: list = allowed values; {lt|lte|gt|gte: X} compares ordered enums, months (YYYY-MM), years, or tokens today±Nm/Ny and milestone:<name>. Undefined facts never match.",
+  "Checks produce warning badges only; they never change colours."
+ ]
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "relocat-rights-map/authorities.schema@1",
+  "title": "Relocat Rights Map authorities file",
+  "description": "Raw experience reports never enter git; only aggregates with n >= 5 are committed (COMMUNITY_MIN_REPORTS). Community ranges are interquartile ranges (25th-75th percentile), never min-max.",
+  "type": "object",
+  "required": ["schema", "country", "topic", "generated", "notes", "authorities"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {"const": "relocat-rights-map/authorities@1"},
+    "country": {"type": "string", "pattern": "^[A-Z]{2}$"},
+    "topic": {"type": "string", "minLength": 1},
+    "generated": {"$ref": "#/$defs/isoDate"},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "authorities": {"type": "array", "items": {"$ref": "#/$defs/authority"}}
+  },
+  "$defs": {
+    "isoDate": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "src": {"enum": ["official", "community", "estimate", "press", "none"]},
+    "authority": {
+      "type": "object",
+      "required": ["id", "name", "unit", "covers", "covers_label", "mode", "times", "evidence"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "unit": {"type": "string"},
+        "covers": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "covers_label": {"type": "string", "minLength": 1},
+        "mode": {"$ref": "#/$defs/mode"},
+        "address": {"type": ["object", "string", "null"]},
+        "times": {"$ref": "#/$defs/times"},
+        "community": {"$ref": "#/$defs/community"},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}}
+      }
+    },
+    "mode": {
+      "type": "object",
+      "required": ["value", "text", "src"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {"type": ["string", "null"]},
+        "text": {"type": "string", "minLength": 1},
+        "src": {"$ref": "#/$defs/src"},
+        "date": {"type": "string"}
+      }
+    },
+    "times": {
+      "type": "object",
+      "required": ["wait", "proc", "total"],
+      "additionalProperties": false,
+      "properties": {
+        "wait": {"$ref": "#/$defs/timeValue"},
+        "proc": {"$ref": "#/$defs/timeValue"},
+        "total": {"$ref": "#/$defs/timeValue"}
+      }
+    },
+    "timeValue": {
+      "type": "object",
+      "required": ["src"],
+      "additionalProperties": false,
+      "properties": {
+        "src": {"$ref": "#/$defs/src"},
+        "lo": {"type": "number", "minimum": 0},
+        "hi": {"type": "number", "minimum": 0},
+        "text": {"type": "string", "minLength": 1},
+        "date": {"type": "string"},
+        "note": {"type": "string"},
+        "partial": {"type": "boolean"},
+        "stale_exempt": {"type": "boolean"},
+        "n": {"type": "integer", "minimum": 0},
+        "range": {"type": "string"},
+        "evidence": {"type": "array", "items": {"type": "string"}}
+      },
+      "if": {"properties": {"src": {"not": {"const": "none"}}}},
+      "then": {"required": ["lo", "text", "date"]}
+    },
+    "community": {
+      "type": "object",
+      "required": ["n"],
+      "additionalProperties": false,
+      "properties": {
+        "n": {"type": "integer", "minimum": 0},
+        "range": {"type": "string"},
+        "wait_months": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0}},
+        "proc_months": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0}}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["id", "kind", "title", "text", "date"],
+      "additionalProperties": false,
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["official", "press", "community", "estimate", "none"]},
+        "title": {"type": "string", "minLength": 1},
+        "text": {"type": "string", "minLength": 1},
+        "date": {"type": "string"},
+        "url": {"type": "string"},
+        "via": {"type": "string"},
+        "todo": {"type": "string"}
+      }
+    }
+  }
+}

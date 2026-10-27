@@ -1,0 +1,134 @@
+{
+  "description": "A community figure with no range.",
+  "kind": "authorities",
+  "expect": [
+    "community"
+  ],
+  "document": {
+    "schema": "relocat-rights-map/authorities@1",
+    "country": "DE",
+    "topic": "t-auth",
+    "generated": "2026-10-27",
+    "notes": [
+      "Fixture."
+    ],
+    "authorities": [
+      {
+        "id": "a1",
+        "name": "Authority one",
+        "unit": "Unit",
+        "covers": [
+          "01001"
+        ],
+        "covers_label": "Area one",
+        "mode": {
+          "value": null,
+          "text": "Online",
+          "src": "official",
+          "date": "2026-10"
+        },
+        "times": {
+          "wait": {
+            "src": "none"
+          },
+          "proc": {
+            "src": "official",
+            "lo": 6,
+            "hi": 9,
+            "text": "6 to 9 months",
+            "date": "2026-10-01",
+            "evidence": [
+              "e-off"
+            ]
+          },
+          "total": {
+            "src": "community",
+            "lo": 3,
+            "hi": 12,
+            "text": "3 to 12 months",
+            "date": "2026-10",
+            "n": 5,
+            "evidence": [
+              "e-com"
+            ]
+          }
+        },
+        "community": {
+          "n": 5,
+          "range": "iqr",
+          "wait_months": [
+            3,
+            6
+          ],
+          "proc_months": [
+            6,
+            9
+          ]
+        },
+        "evidence": [
+          {
+            "id": "e-off",
+            "kind": "official",
+            "title": "Official page",
+            "text": "Text.",
+            "date": "2026-10-01",
+            "url": "https://example.org/a1"
+          },
+          {
+            "id": "e-press",
+            "kind": "press",
+            "title": "Press",
+            "text": "Text.",
+            "date": "2026-10-02",
+            "via": "Newspaper"
+          },
+          {
+            "id": "e-com",
+            "kind": "community",
+            "title": "Reports",
+            "text": "Text.",
+            "date": "2026-10"
+          }
+        ]
+      },
+      {
+        "id": "a2",
+        "name": "Authority two",
+        "unit": "Unit",
+        "covers": [
+          "01002",
+          "01003"
+        ],
+        "covers_label": "Area two",
+        "mode": {
+          "value": null,
+          "text": "Not verified yet",
+          "src": "none"
+        },
+        "times": {
+          "wait": {
+            "src": "none"
+          },
+          "proc": {
+            "src": "none"
+          },
+          "total": {
+            "src": "none"
+          }
+        },
+        "community": {
+          "n": 0
+        },
+        "evidence": [
+          {
+            "id": "none",
+            "kind": "none",
+            "title": "None",
+            "text": "No figure.",
+            "date": "2026-10-22"
+          }
+        ]
+      }
+    ]
+  }
+}
