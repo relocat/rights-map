@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
+#
+# Weekly update pull requests for the pinned dev dependencies and the pinned
+# GitHub Actions. The map itself has no runtime dependency.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /tools
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /scripts/test-web-e2e
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /geo
+    schedule:
+      interval: weekly
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

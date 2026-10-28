@@ -22,16 +22,16 @@
       "required": ["id", "name", "unit", "covers", "covers_label", "mode", "times", "evidence"],
       "additionalProperties": false,
       "properties": {
-        "id": {"type": "string", "minLength": 1},
-        "name": {"type": "string", "minLength": 1},
+        "id": {"type": "string", "minLength": 1, "description": "Unique, stable key of the authority, for example de-sh-stadt-kiel."},
+        "name": {"type": "string", "minLength": 1, "description": "Official name of the authority."},
         "unit": {"type": "string"},
-        "covers": {"type": "array", "minItems": 1, "items": {"type": "string"}},
-        "covers_label": {"type": "string", "minLength": 1},
+        "covers": {"type": "array", "minItems": 1, "items": {"type": "string"}, "description": "Districts this authority decides for, as 5-digit AGS keys of the district layer. A district is covered by one authority only."},
+        "covers_label": {"type": "string", "minLength": 1, "description": "The coverage in words, shown to readers."},
         "mode": {"$ref": "#/$defs/mode"},
         "address": {"type": ["object", "string", "null"]},
-        "times": {"$ref": "#/$defs/times"},
-        "community": {"$ref": "#/$defs/community"},
-        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}}
+        "times": {"$ref": "#/$defs/times", "description": "The three time figures of the authority, in months."},
+        "community": {"$ref": "#/$defs/community", "description": "Summary of user-reported times. Generated, not edited by hand."},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}, "description": "The sources the figures rely on; time figures refer to them by id."}
       }
     },
     "mode": {
@@ -39,10 +39,10 @@
       "required": ["value", "text", "src"],
       "additionalProperties": false,
       "properties": {
-        "value": {"type": ["string", "null"]},
-        "text": {"type": "string", "minLength": 1},
-        "src": {"$ref": "#/$defs/src"},
-        "date": {"type": "string"}
+        "value": {"type": ["string", "null"], "description": "Short code of how to apply (online, appointment, paper, waiting_list), or null when unknown."},
+        "text": {"type": "string", "minLength": 1, "description": "The sentence shown to readers."},
+        "src": {"$ref": "#/$defs/src", "description": "Kind of source behind the statement."},
+        "date": {"type": "string", "description": "When the source was published, or read if it is undated."}
       }
     },
     "times": {
@@ -50,9 +50,9 @@
       "required": ["wait", "proc", "total"],
       "additionalProperties": false,
       "properties": {
-        "wait": {"$ref": "#/$defs/timeValue"},
-        "proc": {"$ref": "#/$defs/timeValue"},
-        "total": {"$ref": "#/$defs/timeValue"}
+        "wait": {"$ref": "#/$defs/timeValue", "description": "Months before the authority starts processing."},
+        "proc": {"$ref": "#/$defs/timeValue", "description": "Months of processing itself."},
+        "total": {"$ref": "#/$defs/timeValue", "description": "Months from application to decision."}
       }
     },
     "timeValue": {
@@ -60,17 +60,17 @@
       "required": ["src"],
       "additionalProperties": false,
       "properties": {
-        "src": {"$ref": "#/$defs/src"},
-        "lo": {"type": "number", "minimum": 0},
-        "hi": {"type": "number", "minimum": 0},
-        "text": {"type": "string", "minLength": 1},
-        "date": {"type": "string"},
-        "note": {"type": "string"},
-        "partial": {"type": "boolean"},
-        "stale_exempt": {"type": "boolean"},
-        "n": {"type": "integer", "minimum": 0},
-        "range": {"type": "string"},
-        "evidence": {"type": "array", "items": {"type": "string"}}
+        "src": {"$ref": "#/$defs/src", "description": "Kind of source; none means no figure is known."},
+        "lo": {"type": "number", "minimum": 0, "description": "Lower bound in months."},
+        "hi": {"type": "number", "minimum": 0, "description": "Upper bound in months; omit when the source gives one number. Not below lo."},
+        "text": {"type": "string", "minLength": 1, "description": "The wording shown to readers."},
+        "date": {"type": "string", "description": "YYYY-MM-DD, or YYYY-MM, of the source or of the day it was read. An official figure older than 12 months is stale."},
+        "note": {"type": "string", "description": "How the source was read; caveats."},
+        "partial": {"type": "boolean", "description": "True when the source gives only a lower limit (more than lo months)."},
+        "stale_exempt": {"type": "boolean", "description": "True for an official figure that cannot go out of date."},
+        "n": {"type": "integer", "minimum": 0, "description": "Number of reports behind a community figure; at least 5 to be published."},
+        "range": {"type": "string", "description": "For a community figure, iqr: the 25th to 75th percentile."},
+        "evidence": {"type": "array", "items": {"type": "string"}, "description": "Ids of the evidence entries of this authority that support the figure; required for official."}
       },
       "if": {"properties": {"src": {"not": {"const": "none"}}}},
       "then": {"required": ["lo", "text", "date"]}
@@ -80,8 +80,8 @@
       "required": ["n"],
       "additionalProperties": false,
       "properties": {
-        "n": {"type": "integer", "minimum": 0},
-        "range": {"type": "string"},
+        "n": {"type": "integer", "minimum": 0, "description": "Number of reports. Figures are published only from 5 reports."},
+        "range": {"type": "string", "description": "iqr: the 25th to 75th percentile, never min-max."},
         "wait_months": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0}},
         "proc_months": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number", "minimum": 0}}
       }
@@ -92,13 +92,13 @@
       "additionalProperties": false,
       "properties": {
         "id": {"type": "string", "minLength": 1},
-        "kind": {"enum": ["official", "press", "community", "estimate", "none"]},
-        "title": {"type": "string", "minLength": 1},
-        "text": {"type": "string", "minLength": 1},
-        "date": {"type": "string"},
-        "url": {"type": "string"},
-        "via": {"type": "string"},
-        "todo": {"type": "string"}
+        "kind": {"enum": ["official", "press", "community", "estimate", "none"], "description": "Kind of source. official needs a url; press needs via."},
+        "title": {"type": "string", "minLength": 1, "description": "What the source is."},
+        "text": {"type": "string", "minLength": 1, "description": "The passage the figure comes from, quoted or paraphrased briefly."},
+        "date": {"type": "string", "description": "Publication date, or the day an undated page was read."},
+        "url": {"type": "string", "description": "Link to the source; must start with https://."},
+        "via": {"type": "string", "description": "Outlet and date when someone else reports the source."},
+        "todo": {"type": "string", "description": "An open follow-up."}
       }
     }
   }

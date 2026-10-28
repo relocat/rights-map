@@ -17,6 +17,7 @@ permissions:
 jobs:
   dco:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
@@ -36,9 +37,10 @@ jobs:
             echo "::error::Could not list the pull request's commits"
             exit 1
           fi
+          # [[:space:]]* at the end tolerates trailing blanks and the CR of a CRLF message.
           missing=0
           for sha in $commits; do
-            if ! git show -s --format=%B "$sha" | grep -qE '^Signed-off-by: .+ <[^<>@[:space:]]+@[^<>[:space:]]+>$'; then
+            if ! git show -s --format=%B "$sha" | grep -qE '^Signed-off-by: .+ <[^<>@[:space:]]+@[^<>[:space:]]+>[[:space:]]*$'; then
               echo "::error::Commit ${sha:0:12} has no Signed-off-by trailer. Amend with: git commit -s --amend"
               missing=1
             fi

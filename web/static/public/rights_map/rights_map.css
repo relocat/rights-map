@@ -5,11 +5,12 @@
 
    All colours, radii, spacing and type sizes are declared ONCE in the token
    block below (status colours included). Rules further down only reference tokens.
-   Theme: the page follows the site (tokens.css). Every colour token that has a
-   site equivalent is a var() of it, so a theme switch needs no script. Tokens
-   with no site equivalent (the map's sea and land, status colours, callouts)
-   get their dark values in the single dark override block, whose two selectors
-   mirror tokens.css exactly: <html data-theme="dark"> wins, otherwise
+   Theme: the page follows the host page's theme tokens (demo/demo.css in the
+   public demo). Every colour token that has a host equivalent is a var() of
+   it, so a theme switch needs no script. Tokens with no host equivalent (the
+   map's sea and land, status colours, callouts) get their dark values in the
+   single dark override block, whose two selectors mirror the host page's
+   theme selectors: <html data-theme="dark"> wins, otherwise
    prefers-color-scheme decides unless the reader chose light. Keep the two
    dark declarations identical.
 
@@ -168,7 +169,7 @@
 }
 
 /* ============================================================
-   Dark theme: same two selectors as tokens.css
+   Dark theme: same two selectors as the host page's theme tokens
    ============================================================ */
 
 :root[data-theme="dark"] .rm-root {

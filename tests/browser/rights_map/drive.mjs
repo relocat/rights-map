@@ -892,7 +892,7 @@ await memoryPage.goto(`${BASE}/map/`);
 await memoryPage.waitForSelector('.rm-country');
 check("non-persistent notice shown", (await memoryPage.locator('.rm-pill-warning').textContent()).includes("won't be remembered"));
 
-// Theme: the page follows the site theme (tokens.css) in both ways the site decides it
+// Theme: the page follows the host page's theme tokens (demo/demo.css in the public demo) in both ways the host decides it
 const THEME_STORAGE_KEY = 'relocat-theme';
 const MIN_GRAPHIC_CONTRAST = 3;
 const MIN_STATUS_LIGHTNESS_RATIO = 1.3;

@@ -7,19 +7,26 @@ in the browser: static files, no account and no tracking.
 
 Live: <https://relocat.org/map/>
 
-This repository is a published snapshot of the map app, its data and its geo
-pack. The map is developed in a private repository; see
-[CONTRIBUTING.md](CONTRIBUTING.md) for how changes flow.
+## How this repository works
+
+This repository is published as **snapshots** from the maintainers' development
+tree. Pull requests are welcome, but they are **reviewed here and then ported
+into the next snapshot**, not merged directly, so a pull request stays open
+until the snapshot that contains it is published. You are credited with a
+`Co-authored-by:` trailer in that snapshot commit. Details are in
+[CONTRIBUTING.md](CONTRIBUTING.md). To fix a fact in the data, start with
+[docs/DATA.md](docs/DATA.md). All participants follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Try the demo
 
 ```
-npx serve .
+python3 -m http.server 8000
 ```
 
-Then open `/demo/` (the port is printed by `serve`). Any static file server
-that serves this directory works. The demo is the same map app on a static
-page.
+Then open <http://localhost:8000/demo/>. Run it from the repository root. Any
+static file server that serves this directory works. The demo is the same map
+app on a static page.
 
 Scope: the report and experience forms need the Relocat server and are off in
 this build. The demo shows the rules, the authorities and the geography only.
@@ -42,6 +49,16 @@ bash scripts/test-web-js.sh              # unit tests (installs tools/ first), N
 bash scripts/test-rights-map-browser.sh  # static browser test (Playwright)
 ```
 
+The browser test needs a Chromium build once. After `npm ci --ignore-scripts
+--prefix scripts/test-web-e2e`, install it with:
+
+```
+npx --prefix scripts/test-web-e2e playwright install chromium
+```
+
+On a fresh Linux machine add `--with-deps` (as the CI workflow does) to also
+install the system libraries.
+
 ## Layout
 
 | Path | What |
@@ -52,8 +69,12 @@ bash scripts/test-rights-map-browser.sh  # static browser test (Playwright)
 | `tests/js/`, `tests/browser/` | unit tests and the browser test driver |
 | `tools/` | the Node data validator |
 | `demo/` | the static demo page |
+| `docs/` | [DATA.md](docs/DATA.md): the data files, field by field, and how to fix one |
 
 ## Licences
+
+Every file states its licence: in its own header, or in [REUSE.toml](REUSE.toml)
+(check with `reuse lint`). The licence texts are in `LICENSES/`.
 
 - Code: GNU GPL, version 3 or later ([LICENSE](LICENSE)).
 - Rights data (`rules.v1.json`, `authorities.de.v1.json`) and their JSON schemas:

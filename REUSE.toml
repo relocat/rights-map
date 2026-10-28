@@ -1,0 +1,110 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
+#
+# REUSE (https://reuse.software) licensing map for the files that carry no
+# SPDX header of their own: data, generated geo files, fonts, fixtures and
+# documents. Source files state their licence in their first lines instead.
+# Check with: reuse lint
+#
+# Later annotations win over earlier ones, so a narrow path placed after a
+# broad glob overrides it.
+version = 1
+
+# Documents, fixtures, lockfiles, package manifests and repository plumbing:
+# the same licence as the code.
+[[annotations]]
+path = [
+  "**/*.md",
+  ".gitignore",
+  "NOTICE",
+  ".github/**",
+  "**/package.json",
+  "**/package-lock.json",
+  "geo/sources.lock.json",
+  "tests/js/rights_map/conformance/**",
+  "tests/js/rights_map/validator-parity/fixtures/**",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2025-2026 Ruslan Zykun and Relocat contributors"
+SPDX-License-Identifier = "GPL-3.0-or-later"
+
+# The Code of Conduct is the unmodified Contributor Covenant 2.1 text, which
+# its authors publish under CC BY 4.0. Only the contact address is filled in.
+[[annotations]]
+path = "CODE_OF_CONDUCT.md"
+precedence = "closest"
+SPDX-FileCopyrightText = "Contributor Covenant (https://www.contributor-covenant.org)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Rights data and their JSON schemas.
+[[annotations]]
+path = [
+  "web/static/public/rights_map/data/rules.v1.json",
+  "web/static/public/rights_map/data/authorities.de.v1.json",
+  "web/static/public/rights_map/data/schema/*.json",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2025-2026 Relocat"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Geo pack: Natural Earth (country borders, regions and land, public domain,
+# applied here as CC0-1.0).
+[[annotations]]
+path = [
+  "web/static/geo/v1/countries.json",
+  "web/static/geo/v1/land.json",
+  "web/static/geo/v1/admin1/*.json",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "Natural Earth (https://www.naturalearthdata.com)"
+SPDX-License-Identifier = "CC0-1.0"
+
+# Geo pack: GeoNames city names and positions, and the city input list.
+[[annotations]]
+path = [
+  "web/static/geo/v1/cities-t1.json",
+  "web/static/geo/v1/cities-t2/*.json",
+  "web/static/geo/v1/cities-t3/*.json",
+  "geo/inputs/cities-europe.tsv",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "GeoNames (https://www.geonames.org)"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Geo pack: district boundaries of Germany, BKG VG250, geometry simplified and
+# reprojected by Relocat (the change notice the licence requires is in NOTICE).
+[[annotations]]
+path = "web/static/geo/v1/l2/DE.json"
+precedence = "closest"
+SPDX-FileCopyrightText = [
+  "(c) BKG (2026)",
+  "2025-2026 Relocat",
+]
+SPDX-License-Identifier = "LicenseRef-dl-de-by-2.0"
+
+# Geo pack manifest: Relocat's own index of the files above (hashes, sources).
+[[annotations]]
+path = "web/static/geo/v1/manifest.json"
+precedence = "closest"
+SPDX-FileCopyrightText = "2025-2026 Relocat"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Fonts shipped for the demo, and their licence texts, under the SIL OFL 1.1.
+# The copyright lines are those printed in the OFL files next to the fonts.
+[[annotations]]
+path = [
+  "web/static/public/fonts/AlbertSans-Variable.woff2",
+  "web/static/public/fonts/OFL-AlbertSans.txt",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2021 The Albert Sans Project Authors (https://github.com/usted/Albert-Sans)"
+SPDX-License-Identifier = "OFL-1.1"
+
+[[annotations]]
+path = [
+  "web/static/public/fonts/JetBrainsMono-Variable.woff2",
+  "web/static/public/fonts/OFL-JetBrainsMono.txt",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)"
+SPDX-License-Identifier = "OFL-1.1"

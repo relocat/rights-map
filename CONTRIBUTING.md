@@ -3,6 +3,28 @@
 Thank you for helping. The most useful contribution is a correct, sourced fix
 to the data. Code fixes and test improvements are welcome too.
 
+## How contributions are handled
+
+This repository is published as snapshots from the maintainers' development
+tree. It is not where the work happens, so a pull request is not merged
+directly:
+
+1. You open a pull request here. CI runs the tests, the data validator, the
+   DCO check and the REUSE check.
+2. A maintainer reviews it in the open, on the pull request.
+3. Once accepted, the change is ported into the development tree and ships in
+   the next snapshot. The pull request is then closed with a link to that
+   snapshot.
+4. The snapshot commit credits you with a `Co-authored-by: Your Name <your
+   email address>` trailer, and the [CHANGELOG](CHANGELOG.md) names the change.
+
+So the "Merged" badge will not appear on your pull request, but the change is
+not lost. Small, focused changes with tests are the easiest to port. How often
+we publish is described in [How contributions flow](#how-contributions-flow)
+below.
+
+Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Licence and sign-off
 
 The code is licensed under the GNU General Public License, version 3 or (at
@@ -79,7 +101,8 @@ By making a contribution to this project, I certify that:
 ## Fixing data
 
 The files `web/static/public/rights_map/data/rules.v1.json` and
-`authorities.de.v1.json` are the data. To fix a fact:
+`authorities.de.v1.json` are the data. [docs/DATA.md](docs/DATA.md) explains
+every field and walks through a complete fix. To fix a fact:
 
 1. Find the official source (law text, ministry or authority page). Press
    articles are not enough on their own.
@@ -102,9 +125,15 @@ Contributing does not give you any right to the "Relocat" name or logo. See
 The Rights Map is developed in a private repository and published here as
 snapshots. The maintainers check issues and pull requests about once a month.
 Accepted changes are ported onto the internal development branch, reviewed
-there, and shipped here with the next snapshot. We credit you in the release
-notes and keep your authorship where the port allows. A quiet pull request is
-not a forgotten one. Small, focused changes with tests are the easiest to port.
+there, and shipped here with the next snapshot. We credit you with a
+`Co-authored-by:` trailer on the snapshot commit and in the changelog, and keep
+your authorship where the port allows. A quiet pull request is not a forgotten
+one. Small, focused changes with tests are the easiest to port.
+
+## Code of Conduct
+
+This project follows the Contributor Covenant 2.1, see
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). Reports go to office@relocat.org.
 
 ## Security issues
 
