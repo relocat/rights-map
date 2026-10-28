@@ -2,8 +2,25 @@
    Copyright (C) 2025-2026 Ruslan Zykun and Relocat contributors
 
    Colour variables the Rights Map stylesheet reads from the site theme, with
-   the light and dark values the live page uses. System fonts replace the site
-   fonts. The demo has no site header, so the map fills the viewport. */
+   the light and dark values the live page uses, and the site's fonts (SIL Open
+   Font License 1.1, see NOTICE). The demo has no site header, so the map fills
+   the viewport. */
+
+@font-face {
+  font-family: 'Albert Sans';
+  src: url('../web/static/public/fonts/AlbertSans-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../web/static/public/fonts/JetBrainsMono-Variable.woff2') format('woff2');
+  font-weight: 100 800;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   --bg: #FFFFFF;
@@ -25,8 +42,8 @@
   --warning-text: #8A7410;
   --focus-ring: #005FCC;
   --shadow-lg: 0 4px 16px rgba(0,0,0,0.08);
-  --font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  --font-body: 'Albert Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --topbar-h: 0px;
 }
 

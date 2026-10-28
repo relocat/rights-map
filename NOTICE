@@ -23,6 +23,11 @@ BKG VG250 (dl-de/by-2-0)
   Data changed: geometry simplified and reprojected.
   Licence: https://www.govdata.de/dl-de/by-2-0
 
+Fonts (SIL Open Font License 1.1)
+  Albert Sans and JetBrains Mono in web/static/public/fonts/, used by the demo
+  page. Each font's licence text is next to it (OFL-AlbertSans.txt,
+  OFL-JetBrainsMono.txt). https://openfontlicense.org
+
 Test fixtures and conformance JSON under tests/ are part of the program and
 are licensed GPL-3.0-or-later.
 
